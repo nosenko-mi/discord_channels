@@ -34,7 +34,7 @@ data = data_filtered.sort_values(by='Date')
 threads = []
 current_thread = []
 for _, row in data.iterrows():
-    if current_thread and (row['Date'] - current_thread[-1]['Date']).total_seconds() > 1500:
+    if current_thread and (row['Date'] - current_thread[-1]['Date']).total_seconds() > 300:
         threads.append(current_thread)
         current_thread = []
     current_thread.append(row)
@@ -68,3 +68,6 @@ for p in qa_pairs:
 
 qa_df = pd.DataFrame(valid_qa_pairs)
 qa_df.to_csv(output, index=False)
+
+# How to run:
+# python prepare.py "path/to/raw/csv/from/discordloader/file.csv" "help-qa-2.csv"
